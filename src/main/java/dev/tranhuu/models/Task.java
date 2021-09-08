@@ -13,9 +13,74 @@ public class Task {
 	private LocalDate assignDate;
 	private LocalDate dueDate;
 	
+	public class Builder{
+		private String title;
+		
+		private int id = -1;
+		private String description = "";
+		private Status status = Status.NEW;
+		private Employee assignedEmployee = null;
+		private Employee createdBy = null;
+		private LocalDate assignDate = LocalDate.now();
+		private LocalDate dueDate = LocalDate.now().plusWeeks(1);
+		
+		public Builder(String title) {
+			this.title = title;
+		}
+		
+		public Builder id(int id) {
+			this.id = id;
+			return this;
+		}
+		
+		public Builder description(String description) {
+			this.description = description;
+			return this;
+		}
+		
+		public Builder status(Status status) {
+			this.status = status;
+			return this;
+		}
+		
+		public Builder assignEmployee(Employee assignedEmployee) {
+			this.assignedEmployee = assignedEmployee;
+			return this;
+		}
+		
+		public Builder createdBy(Employee createdBy) {
+			this.createdBy = createdBy;
+			return this;
+		}
+		
+		public Builder assignDate(LocalDate assignDate) {
+			this.assignDate = assignDate;
+			return this;
+		}
+		
+		public Builder dueDate(LocalDate dueDate) {
+			this.dueDate = dueDate;
+			return this;
+		}
+		
+		public Task build() {
+			return new Task(this);
+		}
+	}
+	
 	public Task() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Task(Builder builder) {
+		this.id = builder.id;
+		this.title = builder.title;
+		this.description = builder.description;
+		this.assignedEmployee = builder.assignedEmployee;
+		this.createdBy = builder.createdBy;
+		this.assignDate = builder.assignDate;
+		this.dueDate = builder.dueDate;
+		this.status = builder.status;
 	}
 
 	public int getId() {
